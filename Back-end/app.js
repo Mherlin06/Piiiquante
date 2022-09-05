@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config({ path:'./config/.env'});
 
+const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
 const app = express();
 
@@ -19,14 +21,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/auth/signup', (req, res, next) => {
-    const users = [
-        {
-            email: 'momo@mail.fr' ,
-            password: 'momopass',
-        }
-    ];
-    res.status(200).json(users);
-});
+// Routes
+app.use('api/auth', userRoutes)
 
 module.exports = app;
