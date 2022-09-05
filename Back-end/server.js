@@ -2,6 +2,7 @@ const http = require('http');
 const app = require('./app');
 require('dotenv').config({ path: './config/.env' });
 
+// Normalize Port
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -16,6 +17,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || 3000);
 app.set('port', port);
 
+// Error Handler
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
@@ -45,4 +47,5 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
+// Server
 server.listen(port);

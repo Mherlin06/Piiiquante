@@ -1,12 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config({ path:'./config/.env'});
+
 
 const app = express();
-mongoose.connect('mongodb+srv://Mherlin06:P6-password@projet6.c5rfnv1.mongodb.net/?retryWrites=true&w=majority',
+
+// Connection to DataBase
+mongoose.connect('mongodb+srv://' + process.env.DB_USER_PASS + '@projet6.c5rfnv1.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+  .catch((err) => console.log('Connexion à MongoDB échouée !', err ));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,5 +30,3 @@ app.use('/api/auth/signup', (req, res, next) => {
 });
 
 module.exports = app;
-
-// Mherlin06 - P6-password ///
