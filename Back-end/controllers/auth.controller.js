@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
-const userModel = require('../models/User.models');
+const userModel = require('../models/user.model');
 
 // Create new user & encrypt its password
-exports.signup = (req, res, next) => {
+module.exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new userModel({
@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
 };
 
 // Compare user's email+password within the DB 
-exports.login = (req, res, next) => {
+module.exports.login = (req, res, next) => {
     userModel.findOne({email: req.body.email})
         .then(user => {
             if (!user){
