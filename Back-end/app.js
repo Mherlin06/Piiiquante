@@ -12,7 +12,7 @@ mongoose.connect('mongodb+srv://' + process.env.DB_USER_PASS + '@projet6.c5rfnv1
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch((err) => console.log('Connexion à MongoDB échouée !', err ));
+  .catch( error => console.log('Connexion à MongoDB échouée !', error ));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,6 +22,6 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('api/auth', userRoutes)
+app.use('api/auth', userRoutes);
 
 module.exports = app;
