@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const userModel = require('../models/User');
+const userModel = require('../models/User.models');
 
 // Create new user & encrypt its password
 exports.signup = (req, res, next) => {
