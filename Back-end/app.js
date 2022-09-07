@@ -24,10 +24,12 @@ app.use((req, res, next) => {
 });
 
 // Parse the data into json format
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routes
+app.use('/api/sauces', (req, res, next) => {
+
+})
 app.use('/api/auth', userRoutes);
 
 module.exports = app;
