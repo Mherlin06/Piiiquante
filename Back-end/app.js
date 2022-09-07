@@ -27,9 +27,13 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Routes
-app.use('/api/sauces', (req, res, next) => {
+app.post('/api/sauces', (req, res, next) => {
+  res.status(201).json({ message: "La sauce a bien été ajoutée."});
+});
+app.get('/api/sauces', (req, res, next) => {
+  res.status(200).json({ message: "les sauces sont disponibles"});
+});
 
-})
 app.use('/api/auth', userRoutes);
 
 module.exports = app;
