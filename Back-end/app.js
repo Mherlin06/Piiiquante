@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 require('dotenv').config({ path:'./config/.env'});
 
 const userRoutes = require('./routes/user.routes');
@@ -27,9 +26,18 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Routes
+const sauceModel = require('./models/sauce.model');
+
 app.post('/api/sauces', (req, res, next) => {
-  res.status(201).json({ message: "La sauce a bien été ajoutée."});
+  delete req.body._id;
+  const sauce = new sauceModel({
+    ...req.body
+  });
+  sauce.save()
+    .then(() => res.status(201).json({ message: "La sauce a bien été enregistrée !"}))
+    .catch(error => res.status(400).json({error}));
 });
+
 app.get('/api/sauces', (req, res, next) => {
   res.status(200).json({ message: "les sauces sont disponibles"});
 });

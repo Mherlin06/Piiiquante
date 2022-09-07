@@ -13,7 +13,7 @@ const sauceSchema = mongoose.Schema({
         trim: true,
         maxLength: 250,
     },
-    descritption: { 
+    description: { 
         type: String, 
         required: true,
         maxLength: 500,
@@ -26,7 +26,7 @@ const sauceSchema = mongoose.Schema({
     },
     imageUrl: { 
         type: String, 
-        default: "../images/sauce.png"
+        required: true
     },
     heat: { 
         type: Number, 
