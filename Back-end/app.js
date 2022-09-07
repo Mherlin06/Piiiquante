@@ -38,11 +38,17 @@ app.post('/api/sauces', (req, res, next) => {
     .catch(error => res.status(400).json({error}));
 });
 
-app.use('/api/sauces', (req, res, next) => {
+app.get('/api/sauces', (req, res, next) => {
   sauceModel.find()
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({error}));
 });
+
+app.get('/api/sauces/:id', (req, res, next) => {
+sauceModel.findOne({ _id: req.params.id })
+  .then(sauce => res.status(200).json(sauce))
+  .catch(error => res.status(400).json({error}));
+})
 
 app.use('/api/auth', userRoutes);
 
