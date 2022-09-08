@@ -32,8 +32,14 @@ const sauceSchema = mongoose.Schema({
         type: Number, 
         required: true 
     },
-    likes: Number,
-    dislikes: Number,
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
+    },
     usersLiked: [String],
     usersDisliked: [String]
 });

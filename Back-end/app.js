@@ -26,16 +26,9 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Routes
-const sauceModel = require('./models/sauce.model');
-
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 
-app.get('/api/sauces/:id', (req, res, next) => {
-sauceModel.findOne({ _id: req.params.id })
-  .then(sauce => res.status(200).json(sauce))
-  .catch(error => res.status(400).json({error}));
-})
 
 
 module.exports = app;
