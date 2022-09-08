@@ -28,21 +28,8 @@ app.use(express.json());
 // Routes
 const sauceModel = require('./models/sauce.model');
 
-app.post('/api/sauces', (req, res, next) => {
-  delete req.body._id;
-  const sauce = new sauceModel({
-    ...req.body
-  });
-  sauce.save()
-    .then(() => res.status(201).json({ message: "La sauce a bien été enregistrée !"}))
-    .catch(error => res.status(400).json({error}));
-});
-
-app.get('/api/sauces', (req, res, next) => {
-  sauceModel.find()
-    .then(sauces => res.status(200).json(sauces))
-    .catch(error => res.status(400).json({error}));
-});
+app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes);
 
 app.get('/api/sauces/:id', (req, res, next) => {
 sauceModel.findOne({ _id: req.params.id })
@@ -50,6 +37,5 @@ sauceModel.findOne({ _id: req.params.id })
   .catch(error => res.status(400).json({error}));
 })
 
-app.use('/api/auth', userRoutes);
 
 module.exports = app;
