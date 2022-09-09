@@ -5,18 +5,18 @@ const sauceSchema = mongoose.Schema({
         type: String, 
         required: true,
         trim: true,
-        maxLength: 250
+        maxlength: 250
     },
     manufacturer: { 
         type: String, 
         required: true,
         trim: true,
-        maxLength: 250,
+        maxlength: 250,
     },
     description: { 
         type: String, 
         required: true,
-        maxLength: 500,
+        maxlength: 500,
         trim: true
     },
     mainPepper: { 
@@ -40,8 +40,14 @@ const sauceSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    usersLiked: [String],
-    usersDisliked: [String]
+    usersLiked: {
+        type: [String],
+        required: true
+    },
+    usersDisliked: {
+        type: [String],
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Sauce', sauceSchema);
