@@ -10,19 +10,19 @@ module.exports.createSauce = (req, res, next) => {
       .catch(error => res.status(400).json({error}));
 };
 
-module.exports.getAllSauces = (req, res, next) => {
+module.exports.readAllSauces = (req, res, next) => {
     sauceModel.find()
       .then(sauces => res.status(200).json(sauces))
       .catch(error => res.status(400).json({error}));
 };
 
-module.exports.getOneSauce = (req, res, next) => {
+module.exports.readOneSauce = (req, res, next) => {
     sauceModel.findOne({ _id: req.params.id })
       .then(sauce => res.status(200).json(sauce))
       .catch(error => res.status(400).json({error}));
 };
 
-module.exports.modifySauce = (req, res, next) => {
+module.exports.updateSauce = (req, res, next) => {
 
 };
 
