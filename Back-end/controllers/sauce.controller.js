@@ -37,9 +37,7 @@ module.exports.updateSauce = (req, res, next) => {
   const sauceObject = req.file
     ? {
         ...JSON.parse(req.body.sauce),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       }
     : {
         ...req.body,
@@ -57,11 +55,9 @@ module.exports.updateSauce = (req, res, next) => {
             { ...sauceObject, _id: req.params.id }
           )
           .then(() =>
-            res
-              .status(200)
-              .json({
-                message: "mofidication de la sauce accomplie avec succès",
-              })
+            res.status(200).json({
+              message: "mofidication de la sauce accomplie avec succès",
+            })
           )
           .catch((error) => res.status(401).json({ error }));
       }
