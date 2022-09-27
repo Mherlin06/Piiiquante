@@ -67,14 +67,17 @@ module.exports.updateSauce = (req, res, next) => {
 
 module.exports.deleteSauce = (req, res, next) => {
   sauceModel
-    .findOneAndDelete({ _id: req.params.id })
+    .findOne({ _id: req.params.id })
     .then((sauce) => {
       const filename = sauce.imageUrl.split("/images/")[1];
-      fs.unlink(`../images/${filename}`, () => {
-        res.status(200).json({ message: "Sauce supprimée" });
+      fs.unlink(`images/${filename}`, () => {
+        sauceModel
+          .deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: "Sauce supprimée avec succès" }))
+          .catch((error) => res.status(400).json({ error }));
       });
     })
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => res.status(500).json({ error }));
 };
 
 module.exports.setLike = (req, res, next) => {};
