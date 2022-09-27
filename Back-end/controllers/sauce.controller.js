@@ -1,6 +1,5 @@
 const sauceModel = require("../models/sauce.model");
 const fs = require('fs');
-const { error } = require("console");
 
 module.exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
@@ -80,4 +79,4 @@ module.exports.deleteSauce = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-module.exports.setLike = (req, res, next) => {};
+module.exports.likeSauce = (req, res, next) => {};
