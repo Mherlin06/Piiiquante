@@ -111,7 +111,7 @@ module.exports.likeSauce = (req, res, next) => {
           sauceModel
             .updateOne(
               { _id: req.params.id },
-              { $push: { usersLiked: userId }, $inc: { likes: +1 } }
+              { $push: { usersLiked: req.auth.userId }, $inc: { likes: +1 } }
             )
             .then(() =>
               res.status(200).json({ message: "Sauce likée avec succès" })
@@ -123,7 +123,7 @@ module.exports.likeSauce = (req, res, next) => {
           sauceModel
             .updateOne(
               { _id: req.params.id },
-              { $push: { usersDisliked: userId }, $inc: { dislikes: +1 } }
+              { $push: { usersDisliked: req.auth.userId }, $inc: { dislikes: +1 } }
             )
             .then(() =>
               res.status(200).json({ message: "Sauce dislikée avec succès" })
@@ -132,11 +132,11 @@ module.exports.likeSauce = (req, res, next) => {
           break;
 
         case 0:
-          if (sauce.usersLiked.includes(userId)) {
+          if (sauce.usersLiked.includes(req.auth.userId)) {
             sauceModel
               .updateOne(
                 { _id: req.params.id },
-                { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
+                { $pull: { usersLiked: req.auth.userId }, $inc: { likes: -1 } }
               )
               .then(() =>
                 res.status(200).json({ message: "Like annulé avec succès" })
@@ -146,7 +146,7 @@ module.exports.likeSauce = (req, res, next) => {
             sauceModel
               .updateOne(
                 { _id: req.params.id },
-                { $pull: { usersDisliked: userId }, $inc: { dislikes: -1 } }
+                { $pull: { usersDisliked: req.auth.userId }, $inc: { dislikes: -1 } }
               )
               .then(() =>
                 res.status(200).json({ message: "dislike annulé avec succès" })
